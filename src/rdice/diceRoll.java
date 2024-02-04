@@ -312,20 +312,39 @@ public class diceRoll extends javax.swing.JFrame {
         tfSum3.setText(String.valueOf(dice1Value + dice2Value+dice3Value + dice4Value));
         
         //matrix rotation based on first throw       
-        String position = "1234";
-        int rotations =  dice1Value + dice2Value + 2;
-        int length = position.length();
-        rotations = rotations % length;
-        String rotatedString = position.substring(length - rotations) + position.substring(0, length - rotations);
-        
-        char direction = rotatedString.charAt(0);
-        switch (direction) {
+        String position = "1234";     
+        int rotations =  dice1Value + dice2Value;
+
+        if (rotations % 2==0){ //even
+            int even = rotations + 1 ; 
+            int elength = position.length();
+            even = even % elength;
+            String evenString = position.substring(elength - even) + position.substring(0, elength - even);  
+            
+            char direction = evenString.charAt(0);
+            switch (direction) {
             case '1' -> tfMatrix.setText("▼");
             case '2' -> tfMatrix.setText("◄");
             case '3' -> tfMatrix.setText("▲");
             case '4' -> tfMatrix.setText("►");
             default -> tfMatrix.setText("Invalid direction");
+             }
+        }else{//odd
+            int odd = rotations - 1 ; 
+            int olength = position.length();
+            odd = odd % olength;
+            String oddString = position.substring(olength - odd) + position.substring(0, olength - odd);  
+            
+            char direction = oddString.charAt(0);           
+            switch (direction) {
+            case '1' -> tfMatrix.setText("▼");
+            case '2' -> tfMatrix.setText("◄");
+            case '3' -> tfMatrix.setText("▲");
+            case '4' -> tfMatrix.setText("►");
+            default -> tfMatrix.setText("Invalid direction");
+            }
         }
+        
         
 
             
@@ -356,6 +375,7 @@ public class diceRoll extends javax.swing.JFrame {
 
     private void tfMatrixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfMatrixActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_tfMatrixActionPerformed
 
     /**
